@@ -1,1 +1,35 @@
-<p>user-list works!</p>
+<div *ngIf="users$ | async as users; else loading">
+  <table tuiTable class="table w-full" [columns]="columns">
+    <thead>
+      <tr tuiThGroup>
+        <th tuiTh>Id</th>
+        <th tuiTh>Name</th>
+        <th tuiTh>Phone Number</th>
+        <th tuiTh>Role</th>
+      </tr>
+    </thead>
+    <tbody tuiTbody [data]="users">
+      <tr
+        *ngFor="let user of users"
+        tuiTr
+        class="row"
+        (click)="goToUserDetail(user.id)"
+      >
+        <td *tuiCell="'Id'" tuiTd>
+          {{ user.id }}
+        </td>
+        <td *tuiCell="'Name'" tuiTd>
+          {{ user.name }}
+        </td>
+        <td *tuiCell="'Phone Number'" tuiTd>
+          {{ user.phoneNumber }}
+        </td>
+        <td *tuiCell="'Role'" tuiTd>
+          {{ user.role }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loading> Loading... </ng-template>

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from './user.model';
-import { Observable, defer } from 'rxjs';
+import { Observable, defer, delay } from 'rxjs';
 
+// Simulate real api call:
 function asyncData<T>(data: T) {
   return defer(() => Promise.resolve(data));
 }
@@ -11,11 +12,11 @@ function asyncData<T>(data: T) {
 })
 export class UserManagementService {
   getUsers(): Observable<User[]> {
-    return asyncData(users);
+    return asyncData(users).pipe(delay(1000));
   }
 
   getUser(id: number): Observable<User | undefined> {
-    return asyncData(users.find(u => u.id === id));
+    return asyncData(users.find(u => u.id === id)).pipe(delay(1000));
   }
 }
 
@@ -45,7 +46,7 @@ const users: User[] = [
     id: 4,
     name: 'Harry Callum',
     phoneNumber: '0898989327',
-    role: 'Security',
+    role: 'Contributor',
     joinedDate: '2023-06-04T13:24:21Z',
   },
   {

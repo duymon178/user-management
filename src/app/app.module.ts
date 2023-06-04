@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { TuiTableModule } from '@taiga-ui/addon-table';
 
 @NgModule({
   declarations: [AppComponent, UserListComponent, UserDetailComponent],
@@ -17,6 +18,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
+    TuiTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],
