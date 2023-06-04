@@ -1,1 +1,15 @@
-<p>user-detail works!</p>
+<div *ngIf="user$ | async as user; else loading" class="user">
+  <h1 class="font-bold text-2xl mb-4">{{ user.name }}</h1>
+  <div><span class="font-semibold">Id:</span> {{ user.id }}</div>
+  <div>
+    <span class="font-semibold">Phone Number:</span> {{ user.phoneNumber }}
+  </div>
+  <div>
+    <span class="font-semibold">Role:</span> {{ user.role }}
+  </div>
+  <div>
+    <span class="font-semibold">Joined Date:</span> {{ user.joinedDate | date:"dd/MM/yyyy" }}
+  </div>
+</div>
+
+<ng-template #loading> Loading... </ng-template>
