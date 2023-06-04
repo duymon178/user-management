@@ -1,4 +1,4 @@
-<div *ngIf="users$ | async as users; else loading">
+<tui-loader [showLoader]="!!loading" [overlay]="true">
   <table tuiTable class="table w-full" [columns]="columns">
     <thead>
       <tr tuiThGroup>
@@ -13,7 +13,7 @@
         *ngFor="let user of users"
         tuiTr
         class="row"
-        (click)="goToUserDetail(user.id)"
+        (click)="clickUser.emit(user.id)"
       >
         <td *tuiCell="'Id'" tuiTd>
           {{ user.id }}
@@ -30,6 +30,4 @@
       </tr>
     </tbody>
   </table>
-</div>
-
-<ng-template #loading> Loading... </ng-template>
+</tui-loader>

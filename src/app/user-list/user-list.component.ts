@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { UserManagementService } from '../user-management.service';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { User } from '../user.model';
 
 @Component({
   selector: 'user-management-user-list',
@@ -9,18 +8,15 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListComponent {
-  users$ = this.service.getUsers();
+  @Input() loading = true;
+  @Input() users: User[] = [];
 
+  @Output() clickUser = new EventEmitter<number>();
+  
   columns = [
     "Id",
     "Name",
     "Phone Number",
     "Role"
   ]
-
-  constructor(private service: UserManagementService, private router: Router) {}
-
-  goToUserDetail(id: number) {
-    return this.router.navigate(['user', id]);
-  }
 }

@@ -1,0 +1,5 @@
+<user-management-user-list
+  [users]="(users$ | async) || []"
+  [loading]="loading"
+  (clickUser)="goToUserDetail($event)"
+></user-management-user-list>

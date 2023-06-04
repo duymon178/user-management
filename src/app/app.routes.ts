@@ -1,11 +1,11 @@
 import { Route } from '@angular/router';
-import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { UserListContainerComponent } from './user-list-container/user-list-container.component';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    component: UserListComponent,
+    component: UserListContainerComponent,
   },
   {
     path: 'user/:id',
