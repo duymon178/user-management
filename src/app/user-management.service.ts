@@ -11,12 +11,14 @@ function asyncData<T>(data: T) {
   providedIn: 'root',
 })
 export class UserManagementService {
-  getUsers(): Observable<User[]> {
-    return asyncData(users).pipe(delay(1000));
+  getUsers(term: string): Observable<User[]> {
+    return asyncData(
+      users.filter((u) => u.name.toLowerCase().includes(term.toLowerCase()))
+    ).pipe(delay(1000));
   }
 
   getUser(id: number): Observable<User | undefined> {
-    return asyncData(users.find(u => u.id === id)).pipe(delay(1000));
+    return asyncData(users.find((u) => u.id === id)).pipe(delay(1000));
   }
 }
 

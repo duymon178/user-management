@@ -1,3 +1,8 @@
+<user-management-user-list-search
+  [loading]="searchLoading"
+  (search)="handleOnSearch($event)"
+></user-management-user-list-search>
+
 <user-management-user-list
   [users]="(users$ | async) || []"
   [loading]="loading"

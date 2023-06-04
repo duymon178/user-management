@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+} from '@angular/core';
 import { UserManagementService } from '../user-management.service';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { BehaviorSubject, tap, switchMap } from 'rxjs';
 
 @Component({
   selector: 'user-management-user-list-container',
@@ -11,11 +15,34 @@ import { tap } from 'rxjs';
 })
 export class UserListContainerComponent {
   loading = true;
-  users$ = this.service.getUsers().pipe(tap(() => this.loading = false));
+  searchLoading = false;
 
-  constructor(private service: UserManagementService, private router: Router) {}
+  searchTerm$ = new BehaviorSubject<string>('');
+  users$ = this.searchTerm$.pipe(
+    switchMap((term: string) =>
+      this.service.getUsers(term).pipe(
+        tap(() => {
+          this.loading = false;
+          this.searchLoading = false;
+          this.cd.markForCheck();
+        })
+      )
+    )
+  );
+
+  constructor(
+    private service: UserManagementService,
+    private router: Router,
+    private cd: ChangeDetectorRef
+  ) {}
 
   goToUserDetail(id: number) {
     return this.router.navigate(['user', id]);
+  }
+
+  handleOnSearch(term: string) {
+    this.searchTerm$.next(term);
+    this.loading = true;
+    this.searchLoading = true;
   }
 }

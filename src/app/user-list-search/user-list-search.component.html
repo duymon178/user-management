@@ -1,0 +1,19 @@
+<form class="b-form mb-6 flex" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <tui-input
+    class="mr-6 w-80"
+    tuiTextfieldSize="m"
+    formControlName="searchTerm"
+  >
+    Search by name
+    <input tuiTextfield type="text" />
+  </tui-input>
+
+  <button
+    tuiButton
+    [showLoader]="loading"
+    [iconRight]="'tuiIconSearch'"
+    type="submit"
+  >
+    Search
+  </button>
+</form>
